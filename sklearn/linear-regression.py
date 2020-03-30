@@ -6,7 +6,7 @@ from sklearn import linear_model
 
 
 def read_data_from_csv():
-    data = pd.read_csv("student-data/student-math.csv", sep=";")
+    data = pd.read_csv("data/student-math.csv", sep=";")
     data = data[["G1", "G2", "G3", "studytime", "failures", "absences"]]
     return data
 
