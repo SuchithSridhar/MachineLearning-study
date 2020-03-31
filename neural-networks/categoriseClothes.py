@@ -8,10 +8,12 @@ def save_model(model):
     with open("NeuralModel.pickle", "wb") as f:
         pickle.dump(model, f)
 
+
 def load_model():
     with open("NeuralModel.pickle", "wb") as f:
-        model =pickle.load(f)
+        model = pickle.load(f)
     return model
+
 
 def showImage(image_data):
     plt.imshow(image_data, cmap=plt.cm.binary)
@@ -19,7 +21,7 @@ def showImage(image_data):
 
 
 data = keras.datasets.fashion_mnist
-(train_images, train_labels),(test_images, test_labels) = data.load_data()
+(train_images, train_labels), (test_images, test_labels) = data.load_data()
 
 # labels 0-9
 
@@ -36,11 +38,13 @@ test_images = test_images / 255
 
 model = keras.Sequential()
 
-model.add(keras.layers.Flatten(input_shape=(28,28)))
-model.add(keras.layers.Dense(128, activation="relu")) # Rectifier linear unit
-model.add(keras.layers.Dense(10, activation="softmax")) # percentage output - probability
+model.add(keras.layers.Flatten(input_shape=(28, 28)))
+model.add(keras.layers.Dense(128, activation="relu"))  # Rectifier linear unit
+# percentage output - probability
+model.add(keras.layers.Dense(10, activation="softmax"))
 
-model.compile(optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"])
+model.compile(optimizer="adam", loss="sparse_categorical_crossentropy",
+              metrics=["accuracy"])
 
 model.fit(train_images, train_labels, epochs=5)
 # epochs - the number of times it sees the same image
@@ -59,6 +63,3 @@ for i in range(10):
     plt.xlabel(f"Actual Object : {class_names[test_labels[i]]}")
     plt.title(f"Prediction: {class_names[np.argmax(prediction[i])]}")
     plt.show()
-
-
-
